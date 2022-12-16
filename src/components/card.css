@@ -1,0 +1,8 @@
+.card{ 
+    width: 50vh;
+    align-items: center;   
+}
+.image{
+    width:500px;
+    height: 500px;
+}
