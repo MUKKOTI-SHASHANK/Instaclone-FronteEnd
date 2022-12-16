@@ -1,14 +1,18 @@
-import { Link } from "react-router-dom";
+
 import "../components/uploadview.css";
 import Header from "./header";
+import { useNavigate } from "react-router-dom";
 
-export default function UploadView({Indicator}){
+
+export default function UploadView({setIndicators}){
+    const navigate = useNavigate();
     async function FormHandler(e){
-        //e.preventDefault();
+        e.preventDefault();
 
         console.log(e.target);
         let formData = new FormData(e.target);
-        // let dataFromForm = Object.fromEntries(formData.entries());
+        let dataFromForm = Object.fromEntries(formData.entries());
+        console.log(dataFromForm);
 
 
 
@@ -29,20 +33,20 @@ export default function UploadView({Indicator}){
         })
 
 
-        Indicator(pre=>{
-            return !pre
-        })
+        // setIndicators(pre=>{
+        //     return !pre
+        // })
 
-        navigate("/posts");
+        navigate("/postview");
     }
     return <div>
     <Header/>
-     <form onClick={FormHandler} id="container">
-        <input type={"file"} name="file" id= "input_file" accept=".jpg, .jpeg, .png, .pdf" required={true}></input>
-        <input type={"text"} name="author" id="input_author" placeholder="Author" required={true}></input>
+     <form onSubmit={FormHandler} id="container">
+        <input type={"file"} name="PostImage" id= "input_file" accept=".jpg, .jpeg, .png, .pdf" required={true}></input>
+        <input type={"text"} name="name" id="input_author" placeholder="Author" required={true}></input>
         <input type={"text"} name="location" id="input_location" placeholder="Location" required={true}></input>
         <input type={"text"} name="description" id="input_description" placeholder="Descirption" required={true}></input>
-        <Link to={"/postview"}><button>Post</button></Link>
+        <button id="button">Post</button>
     </form>
     </div>
 }
